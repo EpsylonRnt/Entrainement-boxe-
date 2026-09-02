@@ -326,48 +326,46 @@
       id: 's1',
       label: 'Jambes',
       title: 'Séance 1 — Jambes',
-      sub: 'Force max + explosivité bas du corps',
+      sub: 'Force-vitesse + stabilité dynamique',
       exercises: [
-        { id: 'squat', name: 'Squat (back squat / trap bar)', target: '4 x 4-5 · 80-85% 1RM' },
-        { id: 'rdl', name: 'Soulevé de terre roumain', target: '3 x 6' },
-        { id: 'fentes-bulg', name: 'Fentes bulgares', target: '3 x 8 / jambe' },
-        { id: 'box-jump', name: 'Squat sauté / Box jump', target: '3 x 4' },
-        { id: 'mollets', name: 'Mollets debout', target: '3 x 12' },
+        { id: 'squat', name: 'Squat — concentrique explosif', target: '5 x 3-4 · 75-80% 1RM · excentrique 3s' },
+        { id: 'rdl-uni', name: 'RDL unilatéral', target: '3 x 8 / jambe' },
+        { id: 'step-up', name: 'Step-up lesté', target: '3 x 8 / jambe' },
+        { id: 'box-jump', name: 'Box jump + réception freinée 1s', target: '4 x 4' },
+        { id: 'nordic-curl', name: 'Nordic curl (ischio-jambiers)', target: '3 x 5 · progressif' },
       ],
     },
     {
       id: 's2',
       label: 'Haut du corps',
       title: 'Séance 2 — Haut du corps',
-      sub: 'Poussée / tirage + puissance de frappe',
+      sub: 'Puissance + gainage intégré',
       exercises: [
-        { id: 'developpe', name: 'Développé couché / pompes lestées explosives', target: '4 x 5' },
-        { id: 'rowing', name: 'Tirage horizontal (rowing)', target: '4 x 6-8' },
-        { id: 'cable-rot', name: 'Rotation au câble (woodchop)', target: '4 x 8 / côté' },
-        { id: 'kb-swing', name: 'Tirage vertical explosif (kettlebell swing)', target: '3 x 8' },
-        { id: 'epaules', name: 'Développé militaire / élévations latérales', target: '3 x 8-10' },
+        { id: 'developpe', name: 'Développé couché — concentrique explosif', target: '4 x 4-5 · 75-80% 1RM' },
+        { id: 'rowing-pendlay', name: 'Rowing Pendlay (barre au sol entre chaque rep)', target: '4 x 5' },
+        { id: 'cable-rot', name: 'Rotation câble woodchop (haut→bas + bas→haut)', target: '4 x 8 / côté' },
+        { id: 'tirage-uni', name: 'Tirage vertical unilatéral au câble', target: '3 x 10 / côté' },
+        { id: 'curl-ext-triceps', name: 'Curl excentriques + extension triceps corde', target: '3 x 10' },
       ],
     },
     {
       id: 's3',
       label: 'Gainage',
-      title: 'Séance 3 — Gainage / Conditionnement',
-      sub: 'Core spécifique boxe + finisher cardio',
+      title: 'Séance 3 — Gainage sous fatigue',
+      sub: 'Core spécifique boxe + conditionnement rounds',
       exercises: [
-        { id: 'planche', name: 'Planche', target: '3 x 45s' },
+        { id: 'planche', name: 'Planche sur anneaux / TRX', target: '3 x 30s' },
         { id: 'pallof', name: 'Pallof press', target: '3 x 10 / côté' },
-        { id: 'russian-twist', name: 'Russian twist lesté', target: '3 x 15 / côté' },
-        { id: 'dead-bug', name: 'Dead bug', target: '3 x 10 / côté' },
-        { id: 'mountain-climb', name: 'Mountain climbers', target: '3 x 20s' },
-        { id: 'finisher', name: 'Finisher conditionnement (vélo/corde/sprint)', target: '6-8 x 30s effort / 30s repos' },
+        { id: 'fente-rot', name: 'Fente inversée avec rotation thoracique', target: '3 x 8 / côté' },
+        { id: 'ab-wheel', name: 'Ab wheel rollout', target: '3 x 8' },
+        { id: 'rounds-cond', name: 'Rounds cardio (corde + vélo + burpees)', target: '3 x 3 min / 1 min repos' },
+        { id: 'finisher', name: 'Finisher sprint vélo ALL OUT', target: '5 x 10s sprint / 50s récup' },
       ],
     },
   ];
 
-  const STORAGE_KEY = 'training-logs-v1';
+  const STORAGE_KEY = 'training-logs-v2';
 
-  // Couche de stockage adaptative : utilise window.storage si disponible (aperçu Claude),
-  // sinon bascule sur localStorage (fichier exporté et ouvert/hébergé en dehors de Claude).
   const Storage = {
     hasClaudeStorage: typeof window.storage !== 'undefined',
     async get(key){
@@ -375,9 +373,7 @@
         try {
           const result = await window.storage.get(key, false);
           return result ? result.value : null;
-        } catch (e){
-          return null;
-        }
+        } catch (e){ return null; }
       }
       try { return localStorage.getItem(key); } catch (e){ return null; }
     },
@@ -391,9 +387,7 @@
     }
   };
 
-  function todayStr(){
-    return new Date().toISOString().slice(0,10);
-  }
+  function todayStr(){ return new Date().toISOString().slice(0,10); }
 
   function formatDateShort(d){
     const dt = new Date(d + 'T00:00:00');
@@ -409,36 +403,28 @@
       .filter(e => e.charge && !isNaN(parseFloat(e.charge)))
       .map(e => ({ date: e.date, value: parseFloat(e.charge) }))
       .sort((a,b) => a.date.localeCompare(b.date));
-
     if (points.length < 2){
       return h('div', { className: 'history-empty' }, 'Ajoute au moins 2 séances avec une charge chiffrée pour voir la courbe.');
     }
-
     const W = 320, H = 110, PAD = 24;
     const values = points.map(p => p.value);
     const min = Math.min(...values), max = Math.max(...values);
     const range = max - min || 1;
     const xStep = (W - PAD * 2) / (points.length - 1);
-
     const coords = points.map((p, i) => ({
       x: PAD + i * xStep,
       y: H - PAD - ((p.value - min) / range) * (H - PAD * 2),
       ...p
     }));
-
     const pathD = coords.map((c, i) => (i === 0 ? 'M' : 'L') + c.x.toFixed(1) + ',' + c.y.toFixed(1)).join(' ');
-
     return h('div', { className: 'chart-wrap' },
       h('svg', { viewBox: `0 0 ${W} ${H}`, width: '100%', height: H, preserveAspectRatio: 'xMidYMid meet' },
         h('path', { d: pathD, fill: 'none', stroke: 'var(--crimson)', strokeWidth: 2, strokeLinejoin: 'round', strokeLinecap: 'round' }),
-        coords.map((c, i) =>
-          h('circle', { key: i, cx: c.x, cy: c.y, r: 3, fill: 'var(--gold)' })
-        ),
+        coords.map((c, i) => h('circle', { key: i, cx: c.x, cy: c.y, r: 3, fill: 'var(--gold)' })),
         coords.length > 0 ? h('text', { x: coords[0].x, y: H - 6, fontSize: 9, fill: 'var(--paper-dim)', fontFamily: 'var(--font-mono)' }, formatDateShort(coords[0].date)) : null,
-        coords.length > 1 ? h('text', { x: coords[coords.length-1].x, y: H - 6, fontSize: 9, fill: 'var(--paper-dim)', fontFamily: 'var(--font-mono)', textAnchor: 'end' }, formatDateShort(coords[coords.length-1].date)) : null,
-        h('text', { x: coords[0].x, y: coords.reduce((m,c)=>c.y<m?c.y:m, H), fontSize: 0 }, '')
+        coords.length > 1 ? h('text', { x: coords[coords.length-1].x, y: H - 6, fontSize: 9, fill: 'var(--paper-dim)', fontFamily: 'var(--font-mono)', textAnchor: 'end' }, formatDateShort(coords[coords.length-1].date)) : null
       ),
-      h('div', { className: 'chart-range' }, `${min} \u2192 ${max} kg`)
+      h('div', { className: 'chart-range' }, `${min} → ${max} kg`)
     );
   }
 
@@ -449,18 +435,14 @@
     const [reps, setReps] = useState('');
     const [sets, setSets] = useState('');
     const [note, setNote] = useState('');
-
     const sorted = [...entries].sort((a,b) => b.date.localeCompare(a.date));
     const last = sorted[0];
-
     const canSave = charge.trim() !== '' || reps.trim() !== '' || note.trim() !== '';
-
     function handleSave(){
       if (!canSave) return;
       onAddEntry(exo.id, { date, charge: charge.trim(), reps: reps.trim(), sets: sets.trim(), note: note.trim() });
       setCharge(''); setReps(''); setSets(''); setNote('');
     }
-
     return h('div', { className: 'exo-card' + (open ? ' open' : '') },
       h('div', { className: 'exo-head', onClick: () => setOpen(!open) },
         h('div', null,
@@ -498,12 +480,10 @@
           )
         ),
         h('button', { className: 'btn-save', onClick: handleSave, disabled: !canSave }, 'Enregistrer'),
-
         h('div', { className: 'history' },
           h('div', { className: 'history-title' }, 'Progression de charge'),
           h(ProgressChart, { entries })
         ),
-
         h('div', { className: 'history' },
           h('div', { className: 'history-title' }, `Historique (${sorted.length})`),
           sorted.length === 0
@@ -541,7 +521,7 @@
 
   function App(){
     const [activeSession, setActiveSession] = useState('s1');
-    const [logs, setLogs] = useState(null); // null = loading
+    const [logs, setLogs] = useState(null);
     const [toast, setToast] = useState({ message:'', show:false });
 
     useEffect(() => {
@@ -585,9 +565,9 @@
 
     return h('div', { className: 'wrap' },
       h('div', { className: 'masthead' },
-        h('div', { className: 'eyebrow' }, 'Carnet d\u2019entra\u00eenement \u2014 PPG Boxe'),
+        h('div', { className: 'eyebrow' }, 'Carnet d\u2019entraînement — PPG Boxe · Phase 2'),
         h('h1', null, 'Suivi de charges'),
-        h('div', { className: 'sub' }, 'Programme 3 s\u00e9ances/semaine \u2014 entre les charges, note la technique, le ressenti, et laisse le carnet faire le reste.'),
+        h('div', { className: 'sub' }, 'Programme 3 séances/semaine — entre les charges, note la technique, le ressenti, et laisse le carnet faire le reste.'),
         logs && Object.keys(logs).length > 0
           ? h('button', { className: 'btn-export', onClick: () => exportData(logs) }, 'Exporter mes données (.json)')
           : null
