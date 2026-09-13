@@ -24,8 +24,6 @@
     position: relative;
   }
   .wrap{ max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
-
-  /* ---- Header ---- */
   .masthead{
     border-bottom: 3px solid var(--crimson);
     padding-bottom: 18px;
@@ -54,8 +52,6 @@
     font-size: 13px;
     margin-top: 8px;
   }
-
-  /* ---- Tabs (séances) ---- */
   .btn-export{
     background: none;
     border: 1px solid var(--line);
@@ -68,7 +64,6 @@
     margin-top: 12px;
   }
   .btn-export:hover{ border-color: var(--gold); color: var(--gold); }
-
   .tabs{
     display:flex;
     gap: 2px;
@@ -91,13 +86,8 @@
     transition: background .15s ease, color .15s ease;
     user-select: none;
   }
-  .tab.active{
-    background: var(--crimson);
-    color: var(--paper);
-  }
+  .tab.active{ background: var(--crimson); color: var(--paper); }
   .tab:not(.active):hover{ color: var(--paper); }
-
-  /* ---- Session meta ---- */
   .session-meta{
     display:flex;
     justify-content: space-between;
@@ -113,13 +103,7 @@
     margin: 0;
     letter-spacing: 0.02em;
   }
-  .session-count{
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--gold);
-  }
-
-  /* ---- Exercise card ---- */
+  .session-count{ font-family: var(--font-mono); font-size: 12px; color: var(--gold); }
   .exo-card{
     background: var(--canvas-raised);
     border: 1px solid var(--line);
@@ -136,44 +120,14 @@
     cursor: pointer;
     gap: 10px;
   }
-  .exo-name{
-    font-family: var(--font-display);
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-  }
-  .exo-target{
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--paper-dim);
-    margin-top: 2px;
-  }
-  .exo-last{
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--gold);
-    white-space: nowrap;
-  }
-  .chevron{
-    color: var(--paper-dim);
-    transition: transform .15s ease;
-    flex-shrink:0;
-  }
+  .exo-name{ font-family: var(--font-display); font-size: 16px; text-transform: uppercase; letter-spacing: 0.01em; }
+  .exo-target{ font-family: var(--font-mono); font-size: 11px; color: var(--paper-dim); margin-top: 2px; }
+  .exo-last{ font-family: var(--font-mono); font-size: 12px; color: var(--gold); white-space: nowrap; }
+  .chevron{ color: var(--paper-dim); transition: transform .15s ease; flex-shrink:0; }
   .exo-card.open .chevron{ transform: rotate(180deg); }
-
-  .exo-body{
-    display:none;
-    padding: 0 16px 16px;
-    border-top: 1px solid var(--line);
-  }
+  .exo-body{ display:none; padding: 0 16px 16px; border-top: 1px solid var(--line); }
   .exo-card.open .exo-body{ display:block; }
-
-  .log-form{
-    display:grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin: 14px 0 10px;
-  }
+  .log-form{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0 10px; }
   .log-form .full{ grid-column: 1 / -1; }
   .field label{
     display:block;
@@ -194,12 +148,8 @@
     font-family: var(--font-body);
     font-size: 14px;
   }
-  .field input:focus, .field textarea:focus{
-    outline: none;
-    border-color: var(--crimson);
-  }
+  .field input:focus, .field textarea:focus{ outline: none; border-color: var(--crimson); }
   .field textarea{ resize: vertical; min-height: 36px; }
-
   .btn-save{
     background: var(--crimson);
     color: var(--paper);
@@ -215,12 +165,7 @@
   }
   .btn-save:hover{ background: var(--crimson-dim); }
   .btn-save:disabled{ opacity: 0.4; cursor: default; }
-
-  .history{
-    margin-top: 14px;
-    border-top: 1px dashed var(--line);
-    padding-top: 10px;
-  }
+  .history{ margin-top: 14px; border-top: 1px dashed var(--line); padding-top: 10px; }
   .history-title{
     font-family: var(--font-mono);
     font-size: 10px;
@@ -239,44 +184,15 @@
     gap: 10px;
   }
   .history-row:last-child{ border-bottom: none; }
-  .history-date{
-    font-family: var(--font-mono);
-    color: var(--paper-dim);
-    font-size: 11px;
-    flex-shrink:0;
-    width: 78px;
-  }
+  .history-date{ font-family: var(--font-mono); color: var(--paper-dim); font-size: 11px; flex-shrink:0; width: 78px; }
   .history-data{ flex:1; }
   .history-charge{ color: var(--gold); font-weight:600; }
   .history-note{ color: var(--paper-dim); font-size:12px; font-style: italic; }
-  .history-del{
-    background:none; border:none; color: var(--paper-dim);
-    cursor:pointer; font-size: 16px; line-height:1; padding: 2px 6px;
-    flex-shrink:0;
-  }
+  .history-del{ background:none; border:none; color: var(--paper-dim); cursor:pointer; font-size: 16px; line-height:1; padding: 2px 6px; flex-shrink:0; }
   .history-del:hover{ color: var(--crimson); }
-  .history-empty{
-    color: var(--paper-dim);
-    font-size: 12px;
-    font-style: italic;
-    padding: 6px 0;
-  }
-
-  .chart-wrap{
-    background: var(--ink);
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    padding: 10px 6px 4px;
-    margin-bottom: 4px;
-  }
-  .chart-range{
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--gold);
-    text-align: right;
-    padding: 4px 8px 0;
-  }
-
+  .history-empty{ color: var(--paper-dim); font-size: 12px; font-style: italic; padding: 6px 0; }
+  .chart-wrap{ background: var(--ink); border: 1px solid var(--line); border-radius: 4px; padding: 10px 6px 4px; margin-bottom: 4px; }
+  .chart-range{ font-family: var(--font-mono); font-size: 11px; color: var(--gold); text-align: right; padding: 4px 8px 0; }
   .toast{
     position: fixed;
     bottom: 18px;
@@ -294,22 +210,12 @@
     z-index: 50;
   }
   .toast.show{ transform: translateX(-50%) translateY(0); }
-
-  .loading-line{
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--paper-dim);
-    padding: 20px 0;
-  }
-
+  .loading-line{ font-family: var(--font-mono); font-size: 12px; color: var(--paper-dim); padding: 20px 0; }
   @media (max-width: 480px){
     .log-form{ grid-template-columns: repeat(2, 1fr); }
     .tab{ font-size: 11px; padding: 9px 4px; }
   }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ transition: none !important; }
-  }
+  @media (prefers-reduced-motion: reduce){ *{ transition: none !important; } }
 </style>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
@@ -326,72 +232,75 @@
       id: 's1',
       label: 'Jambes',
       title: 'Séance 1 — Jambes',
-      sub: 'Force-vitesse + stabilité dynamique',
+      sub: 'Jambes + core + cardio',
       exercises: [
-        { id: 'squat', name: 'Squat — concentrique explosif', target: '5 x 3-4 · 75-80% 1RM · excentrique 3s' },
-        { id: 'rdl-uni', name: 'RDL unilatéral', target: '3 x 8 / jambe' },
-        { id: 'step-up', name: 'Step-up lesté', target: '3 x 8 / jambe' },
-        { id: 'box-jump', name: 'Box jump + réception freinée 1s', target: '4 x 4' },
-        { id: 'nordic-curl', name: 'Nordic curl (ischio-jambiers)', target: '3 x 5 · progressif' },
+        { id: 'presse', name: 'Presse à cuisses', target: '4 x 8 · charge lourde' },
+        { id: 'leg-extension', name: 'Leg extension', target: '3 x 10' },
+        { id: 'leg-curl', name: 'Leg curl allongé', target: '3 x 10' },
+        { id: 'mollets', name: 'Mollets debout', target: '3 x 10' },
+        { id: 'crunchs', name: 'Crunchs', target: '3 x 20' },
+        { id: 'planche', name: 'Gainage (planche)', target: '3 x 40s' },
+        { id: 'cardio-s1', name: 'Cardio de fin de séance (vélo / rameur)', target: '15-20 min · intensité modérée à soutenue' },
       ],
     },
     {
       id: 's2',
-      label: 'Haut du corps',
-      title: 'Séance 2 — Haut du corps',
-      sub: 'Puissance + gainage intégré',
+      label: 'Pecs / Bras',
+      title: 'Séance 2 — Pecs / Bras',
+      sub: 'Pecs, bras + core + cardio',
       exercises: [
-        { id: 'developpe', name: 'Développé couché — concentrique explosif', target: '4 x 4-5 · 75-80% 1RM' },
-        { id: 'rowing-pendlay', name: 'Rowing Pendlay (barre au sol entre chaque rep)', target: '4 x 5' },
-        { id: 'cable-rot', name: 'Rotation câble woodchop (haut→bas + bas→haut)', target: '4 x 8 / côté' },
-        { id: 'tirage-uni', name: 'Tirage vertical unilatéral au câble', target: '3 x 10 / côté' },
-        { id: 'curl-ext-triceps', name: 'Curl excentriques + extension triceps corde', target: '3 x 10' },
+        { id: 'developpe', name: 'Développé couché', target: '4 x 5 · charge lourde' },
+        { id: 'chest-press', name: 'Chest press', target: '3 x 10' },
+        { id: 'biceps-curl', name: 'Biceps curl', target: '3 x 10' },
+        { id: 'triceps-extension', name: 'Triceps extension', target: '3 x 10' },
+        { id: 'releve-jambes', name: 'Relevé de jambes', target: '3 x 15' },
+        { id: 'rotations-russes', name: 'Rotations russes', target: '3 x 20 (10 / côté)' },
+        { id: 'cardio-s2', name: 'Cardio de fin de séance (vélo / rameur)', target: '15-20 min · intensité modérée à soutenue' },
       ],
     },
     {
       id: 's3',
-      label: 'Gainage',
-      title: 'Séance 3 — Gainage sous fatigue',
-      sub: 'Core spécifique boxe + conditionnement rounds',
+      label: 'Dos',
+      title: 'Séance 3 — Dos',
+      sub: 'Dos + core + cardio',
       exercises: [
-        { id: 'planche', name: 'Planche sur anneaux / TRX', target: '3 x 30s' },
-        { id: 'pallof', name: 'Pallof press', target: '3 x 10 / côté' },
-        { id: 'fente-rot', name: 'Fente inversée avec rotation thoracique', target: '3 x 8 / côté' },
-        { id: 'ab-wheel', name: 'Ab wheel rollout', target: '3 x 8' },
-        { id: 'rounds-cond', name: 'Rounds cardio (corde + vélo + burpees)', target: '3 x 3 min / 1 min repos' },
-        { id: 'finisher', name: 'Finisher sprint vélo ALL OUT', target: '5 x 10s sprint / 50s récup' },
+        { id: 'tirage-vertical', name: 'Tirage vertical', target: '3 x 10' },
+        { id: 'tirage-horizontal', name: 'Tirage horizontal', target: '3 x 10' },
+        { id: 'rowing', name: 'Rowing', target: '3 x 10' },
+        { id: 'face-pull', name: 'Face pull', target: '3 x 12' },
+        { id: 'tractions', name: 'Tractions', target: '4 x échec' },
+        { id: 'crunchs-inverses', name: 'Crunchs inversés', target: '3 x 15' },
+        { id: 'gainage-lateral', name: 'Gainage latéral', target: '3 x 30s / côté' },
+        { id: 'cardio-s3', name: 'Cardio de fin de séance (vélo / rameur)', target: '15-20 min · intensité modérée à soutenue' },
       ],
     },
   ];
 
-  const STORAGE_KEY = 'training-logs-v2';
+  const STORAGE_KEY = 'training-logs-v3';
 
   const Storage = {
     hasClaudeStorage: typeof window.storage !== 'undefined',
     async get(key){
       if (this.hasClaudeStorage){
-        try {
-          const result = await window.storage.get(key, false);
-          return result ? result.value : null;
-        } catch (e){ return null; }
+        try { const r = await window.storage.get(key, false); return r ? r.value : null; }
+        catch(e){ return null; }
       }
-      try { return localStorage.getItem(key); } catch (e){ return null; }
+      try { return localStorage.getItem(key); } catch(e){ return null; }
     },
     async set(key, value){
       if (this.hasClaudeStorage){
         try { await window.storage.set(key, value, false); return true; }
-        catch (e){ console.error('Erreur de sauvegarde', e); return false; }
+        catch(e){ return false; }
       }
       try { localStorage.setItem(key, value); return true; }
-      catch (e){ console.error('Erreur de sauvegarde', e); return false; }
+      catch(e){ return false; }
     }
   };
 
   function todayStr(){ return new Date().toISOString().slice(0,10); }
 
   function formatDateShort(d){
-    const dt = new Date(d + 'T00:00:00');
-    return dt.toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', year:'2-digit' });
+    return new Date(d + 'T00:00:00').toLocaleDateString('fr-FR', { day:'2-digit', month:'2-digit', year:'2-digit' });
   }
 
   function Toast({ message, show }){
@@ -403,13 +312,11 @@
       .filter(e => e.charge && !isNaN(parseFloat(e.charge)))
       .map(e => ({ date: e.date, value: parseFloat(e.charge) }))
       .sort((a,b) => a.date.localeCompare(b.date));
-    if (points.length < 2){
+    if (points.length < 2)
       return h('div', { className: 'history-empty' }, 'Ajoute au moins 2 séances avec une charge chiffrée pour voir la courbe.');
-    }
     const W = 320, H = 110, PAD = 24;
-    const values = points.map(p => p.value);
-    const min = Math.min(...values), max = Math.max(...values);
-    const range = max - min || 1;
+    const vals = points.map(p => p.value);
+    const min = Math.min(...vals), max = Math.max(...vals), range = max - min || 1;
     const xStep = (W - PAD * 2) / (points.length - 1);
     const coords = points.map((p, i) => ({
       x: PAD + i * xStep,
@@ -418,13 +325,13 @@
     }));
     const pathD = coords.map((c, i) => (i === 0 ? 'M' : 'L') + c.x.toFixed(1) + ',' + c.y.toFixed(1)).join(' ');
     return h('div', { className: 'chart-wrap' },
-      h('svg', { viewBox: `0 0 ${W} ${H}`, width: '100%', height: H, preserveAspectRatio: 'xMidYMid meet' },
+      h('svg', { viewBox: '0 0 ' + W + ' ' + H, width: '100%', height: H, preserveAspectRatio: 'xMidYMid meet' },
         h('path', { d: pathD, fill: 'none', stroke: 'var(--crimson)', strokeWidth: 2, strokeLinejoin: 'round', strokeLinecap: 'round' }),
         coords.map((c, i) => h('circle', { key: i, cx: c.x, cy: c.y, r: 3, fill: 'var(--gold)' })),
-        coords.length > 0 ? h('text', { x: coords[0].x, y: H - 6, fontSize: 9, fill: 'var(--paper-dim)', fontFamily: 'var(--font-mono)' }, formatDateShort(coords[0].date)) : null,
+        h('text', { x: coords[0].x, y: H - 6, fontSize: 9, fill: 'var(--paper-dim)', fontFamily: 'var(--font-mono)' }, formatDateShort(coords[0].date)),
         coords.length > 1 ? h('text', { x: coords[coords.length-1].x, y: H - 6, fontSize: 9, fill: 'var(--paper-dim)', fontFamily: 'var(--font-mono)', textAnchor: 'end' }, formatDateShort(coords[coords.length-1].date)) : null
       ),
-      h('div', { className: 'chart-range' }, `${min} → ${max} kg`)
+      h('div', { className: 'chart-range' }, min + ' → ' + max + ' kg')
     );
   }
 
@@ -438,11 +345,13 @@
     const sorted = [...entries].sort((a,b) => b.date.localeCompare(a.date));
     const last = sorted[0];
     const canSave = charge.trim() !== '' || reps.trim() !== '' || note.trim() !== '';
+
     function handleSave(){
       if (!canSave) return;
       onAddEntry(exo.id, { date, charge: charge.trim(), reps: reps.trim(), sets: sets.trim(), note: note.trim() });
       setCharge(''); setReps(''); setSets(''); setNote('');
     }
+
     return h('div', { className: 'exo-card' + (open ? ' open' : '') },
       h('div', { className: 'exo-head', onClick: () => setOpen(!open) },
         h('div', null,
@@ -450,7 +359,11 @@
           h('div', { className: 'exo-target' }, exo.target)
         ),
         h('div', { style: { display:'flex', alignItems:'center', gap:'10px' } },
-          last ? h('div', { className: 'exo-last' }, (last.charge ? last.charge + ' kg' : '') + (last.charge && last.reps ? ' · ' : '') + (last.reps ? last.reps + ' reps' : '')) : null,
+          last ? h('div', { className: 'exo-last' },
+            (last.charge ? last.charge + ' kg' : '') +
+            (last.charge && last.reps ? ' · ' : '') +
+            (last.reps ? last.reps + ' reps' : '')
+          ) : null,
           h('svg', { className: 'chevron', width:16, height:16, viewBox:'0 0 24 24', fill:'none', stroke:'currentColor', strokeWidth:2 },
             h('path', { d: 'M6 9l6 6 6-6' })
           )
@@ -464,19 +377,19 @@
           ),
           h('div', { className: 'field' },
             h('label', null, 'Charge (kg)'),
-            h('input', { type:'text', inputMode:'decimal', placeholder:'ex. 80', value: charge, onChange: e => setCharge(e.target.value) })
+            h('input', { type:'text', inputMode:'decimal', placeholder:'ex. 60', value: charge, onChange: e => setCharge(e.target.value) })
           ),
           h('div', { className: 'field' },
             h('label', null, 'Séries x reps'),
-            h('input', { type:'text', placeholder:'ex. 4x5', value: reps, onChange: e => setReps(e.target.value) })
+            h('input', { type:'text', placeholder:'ex. 3x10', value: reps, onChange: e => setReps(e.target.value) })
           ),
           h('div', { className: 'field' },
             h('label', null, 'RPE / ressenti'),
-            h('input', { type:'text', placeholder:'ex. 8/10', value: sets, onChange: e => setSets(e.target.value) })
+            h('input', { type:'text', placeholder:'ex. 7/10', value: sets, onChange: e => setSets(e.target.value) })
           ),
           h('div', { className: 'field full' },
             h('label', null, 'Note'),
-            h('textarea', { placeholder:'Technique, douleur, sensation...', value: note, onChange: e => setNote(e.target.value) })
+            h('textarea', { placeholder:'Technique, sensation, douleur...', value: note, onChange: e => setNote(e.target.value) })
           )
         ),
         h('button', { className: 'btn-save', onClick: handleSave, disabled: !canSave }, 'Enregistrer'),
@@ -485,7 +398,7 @@
           h(ProgressChart, { entries })
         ),
         h('div', { className: 'history' },
-          h('div', { className: 'history-title' }, `Historique (${sorted.length})`),
+          h('div', { className: 'history-title' }, 'Historique (' + sorted.length + ')'),
           sorted.length === 0
             ? h('div', { className: 'history-empty' }, 'Aucune séance enregistrée pour cet exercice.')
             : sorted.map(entry =>
@@ -512,7 +425,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'suivi-boxe-' + todayStr() + '.json';
+    a.download = 'suivi-' + todayStr() + '.json';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -528,9 +441,9 @@
       let cancelled = false;
       (async () => {
         const raw = await Storage.get(STORAGE_KEY);
-        if (!cancelled) {
+        if (!cancelled){
           try { setLogs(raw ? JSON.parse(raw) : {}); }
-          catch (e) { setLogs({}); }
+          catch(e){ setLogs({}); }
         }
       })();
       return () => { cancelled = true; };
@@ -541,8 +454,8 @@
       await Storage.set(STORAGE_KEY, JSON.stringify(next));
     }, []);
 
-    const showToast = (message) => {
-      setToast({ message, show: true });
+    const showToast = (msg) => {
+      setToast({ message: msg, show: true });
       setTimeout(() => setToast(t => ({ ...t, show: false })), 1600);
     };
 
@@ -565,9 +478,9 @@
 
     return h('div', { className: 'wrap' },
       h('div', { className: 'masthead' },
-        h('div', { className: 'eyebrow' }, 'Carnet d\u2019entraînement — PPG Boxe · Phase 2'),
+        h('div', { className: 'eyebrow' }, "Carnet d'entraînement — Programme Salle"),
         h('h1', null, 'Suivi de charges'),
-        h('div', { className: 'sub' }, 'Programme 3 séances/semaine — entre les charges, note la technique, le ressenti, et laisse le carnet faire le reste.'),
+        h('div', { className: 'sub' }, 'Programme 3 séances/semaine — enregistre tes charges, suis ta progression.'),
         logs && Object.keys(logs).length > 0
           ? h('button', { className: 'btn-export', onClick: () => exportData(logs) }, 'Exporter mes données (.json)')
           : null
@@ -584,7 +497,7 @@
       session && h('div', { className: 'session-meta' },
         h('div', null,
           h('h2', null, session.title),
-          h('div', { className: 'exo-target', style:{marginTop:'4px'} }, session.sub)
+          h('div', { className: 'exo-target', style:{ marginTop:'4px' } }, session.sub)
         ),
         h('div', { className: 'session-count' }, session.exercises.length + ' exercices')
       ),
